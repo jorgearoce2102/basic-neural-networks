@@ -55,3 +55,4 @@ def backpropagation_test():
 
     error = model.error(output, y)
     print("error after backpropagation", np.round(error,3))
+print("hello")

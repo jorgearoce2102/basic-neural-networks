@@ -116,3 +116,4 @@ def backpropagation(y):
     for i in range(len(layers)-2,1):
         delta_i = delta_i @ der_sigmoid(layers[i-1].a)
         layers[1].weights += alpha * delta_i * layers[i].a
+    

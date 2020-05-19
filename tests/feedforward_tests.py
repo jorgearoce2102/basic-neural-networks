@@ -28,10 +28,14 @@ def feedforward_test():
     model.Layer("input", nb_arguments)
 
     #add hidden layer with 1 neurons
+    model.Layer("hidden", 2, model.sigmoid)
+
+    # add hidden layer with 1 neurons
     model.Layer("hidden", 4, model.sigmoid)
 
     #add hidden layer with 1 neurons
-    model.Layer("hidden", 4, model.sigmoid)
+    # model.Layer("hidden", 2, model.sigmoid)
+
     #create output layer
     NbNeurons = NbClasses
     model.Layer("output",  NbNeurons, model.sigmoid)
@@ -47,12 +51,23 @@ def backpropagation_test():
     input, output, model = feedforward_test() #get both from previous function
     y = np.array([0,1,0])
     error = model.error(output, y)
+    print(error)
+
+    model.backpropagation(y)
+    output = model.feedforward(input)
+    error = model.error(output, y)
+    print(error)
+
+
+def backpropagation_final_test():
+    input, output, model = feedforward_test() #get both from previous function
+    y = np.array([0,1,0])
+    error = model.error(output, y)
     print("error before backpropagation: ",np.round(error,3))
-
-    for i in range(1000):
+    for i in range(100):
         model.backpropagation(y)
-        output = model.feedforward(input) #get both from previous function
-
+        model.feedforward(input) #get both from previous function
+    output = model.feedforward(input)
     error = model.error(output, y)
     print("error after backpropagation", np.round(error,3))
-print("hello")
+    print("output: ", output)
